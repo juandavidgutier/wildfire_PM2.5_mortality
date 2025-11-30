@@ -446,7 +446,7 @@ def process_outcomes(data_fire, data_nofire, outcomes_dict, ate_dataframes, outc
             
             title_text_nofire = f"{label_text}"
             
-            # --- Code adapted from the example ---
+            
             temp_nofire = data_nofire_current['TLML']
             min_temp_nofire = temp_nofire.min()
             max_temp_nofire = temp_nofire.max()
@@ -499,15 +499,15 @@ def process_outcomes(data_fire, data_nofire, outcomes_dict, ate_dataframes, outc
             # Refutation tests for fire
             print(f"Refutation tests for {outcome} (fire):")
             random_fire = model_fire.refute_estimate(identified_estimand_fire, estimate_fire,
-                                                    method_name="random_common_cause", random_state=123, num_simulations=10) 
+                                                    method_name="random_common_cause", random_state=123, num_simulations=50) 
             print(random_fire)
             
             subset_fire = model_fire.refute_estimate(identified_estimand_fire, estimate_fire,
-                                                     subset_fraction=0.1, method_name="data_subset_refuter", random_state=123, num_simulations=10)
+                                                     subset_fraction=0.1, method_name="data_subset_refuter", random_state=123, num_simulations=50)
             print(subset_fire)
             
             placebo_fire = model_fire.refute_estimate(identified_estimand_fire, estimate_fire,
-                                                     method_name="placebo_treatment_refuter", placebo_type="permute", random_state=123, num_simulations=10)
+                                                     method_name="placebo_treatment_refuter", placebo_type="permute", random_state=123, num_simulations=50)
             print(placebo_fire)
             
             
@@ -515,15 +515,15 @@ def process_outcomes(data_fire, data_nofire, outcomes_dict, ate_dataframes, outc
             # Refutation tests for nofire
             print(f"Refutation tests for {outcome} (no fire):")
             random_nofire = model_nofire.refute_estimate(identified_estimand_nofire, estimate_nofire,
-                                                        method_name="random_common_cause", random_state=123, num_simulations=10) 
+                                                        method_name="random_common_cause", random_state=123, num_simulations=50) 
             print(random_nofire)
             
             subset_nofire = model_nofire.refute_estimate(identified_estimand_nofire, estimate_nofire,
-                                                     subset_fraction=0.1, method_name="data_subset_refuter", random_state=123, num_simulations=10)
+                                                     subset_fraction=0.1, method_name="data_subset_refuter", random_state=123, num_simulations=50)
             print(subset_nofire) 
             
             placebo_nofire = model_nofire.refute_estimate(identified_estimand_nofire, estimate_nofire,
-                                                         method_name="placebo_treatment_refuter", placebo_type="permute", random_state=123, num_simulations=10)
+                                                         method_name="placebo_treatment_refuter", placebo_type="permute", random_state=123, num_simulations=50)
             print(placebo_nofire)
 
     return ate_dataframes
